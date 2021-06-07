@@ -1,8 +1,7 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.ui.fragment;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -20,21 +19,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SimpleExpandableListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.format.DateFormat;
@@ -43,14 +38,15 @@ import android.widget.Toast;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
+import id.ac.astra.polman.nim0320190026.criminalintent.helper.PictureUtils;
+import id.ac.astra.polman.nim0320190026.criminalintent.R;
+import id.ac.astra.polman.nim0320190026.criminalintent.architecture.viewmodel.CrimeDetailViewModel;
+import id.ac.astra.polman.nim0320190026.criminalintent.model.Crime;
 
 import static androidx.core.view.ViewCompat.jumpDrawablesToCurrentState;
-import static androidx.core.view.ViewCompat.setTransitionName;
 
 public class CrimeFragment extends Fragment implements DatePickerFragment.Callbacks, TimePickerFragment.Callbacks {
     private static final String ARG_CRIME_ID = "crime_id";
@@ -89,7 +85,7 @@ public class CrimeFragment extends Fragment implements DatePickerFragment.Callba
         return mCrimeDetailViewModel;
     }
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static CrimeFragment newInstance(String crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
         CrimeFragment fragment = new CrimeFragment();
@@ -100,7 +96,7 @@ public class CrimeFragment extends Fragment implements DatePickerFragment.Callba
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        String crimeId = (String) getArguments().getSerializable(ARG_CRIME_ID);
         Log.d(TAG, "args bundle crime ID : " + crimeId);
         // eventually we will load crime from database here
         mCrime = new Crime();
@@ -294,9 +290,7 @@ public class CrimeFragment extends Fragment implements DatePickerFragment.Callba
             suspect = getString(R.string.crime_report_suspect);
         }
 
-        String report = getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
-
-        return report;
+        return getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
     }
 
     private void updatePhotoView() {
@@ -385,12 +379,14 @@ public class CrimeFragment extends Fragment implements DatePickerFragment.Callba
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.d(TAG, "onDetach: Called");
         requireActivity().revokeUriPermission(mPhotoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: Called");
         mCrimeDetailViewModel.saveCrime(mCrime);
     }
 

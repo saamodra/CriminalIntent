@@ -1,13 +1,14 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import java.util.UUID;
+import id.ac.astra.polman.nim0320190026.criminalintent.R;
+import id.ac.astra.polman.nim0320190026.criminalintent.ui.fragment.CrimeFragment;
+import id.ac.astra.polman.nim0320190026.criminalintent.ui.fragment.CrimeListFragment;
 
 public class MainActivity extends AppCompatActivity implements CrimeListFragment.Callbacks {
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements CrimeListFragment
     }
 
     @Override
-    public void onCrimeSelected(UUID crimeId) {
+    public void onCrimeSelected(String crimeId) {
         Fragment fragment = CrimeFragment.newInstance(crimeId);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)

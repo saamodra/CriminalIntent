@@ -1,8 +1,7 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,13 +22,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabLayout;
-
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+
+import id.ac.astra.polman.nim0320190026.criminalintent.R;
+import id.ac.astra.polman.nim0320190026.criminalintent.architecture.viewmodel.CrimeListViewModel;
+import id.ac.astra.polman.nim0320190026.criminalintent.model.Crime;
 
 public class CrimeListFragment extends Fragment {
     private static final String TAG = "CrimeListFragment";
@@ -43,8 +41,8 @@ public class CrimeListFragment extends Fragment {
     private SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
 
 
-    interface Callbacks {
-        public void onCrimeSelected(UUID crimeId);
+    public interface Callbacks {
+        void onCrimeSelected(String crimeId);
     }
 
     private Callbacks mCallbacks = null;
@@ -132,6 +130,7 @@ public class CrimeListFragment extends Fragment {
                 new Observer<List<Crime>>() {
                     @Override
                     public void onChanged(List<Crime> crimes) {
+
                         updateUI(crimes);
                         Log.i(TAG, "Got crimes = " + crimes.size());
                     }
@@ -183,11 +182,6 @@ public class CrimeListFragment extends Fragment {
             mCrimes = crimes;
         }
 
-        @Override
-        public int getItemViewType(int position) {
-            return mCrimes.get(position).isRequiresPolice() ? 1 : 0;
-        }
-
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -201,8 +195,6 @@ public class CrimeListFragment extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             Crime crime = mCrimes.get(position);
             ((CrimeHolder) holder).bind(crime);
-
-
         }
 
         @Override

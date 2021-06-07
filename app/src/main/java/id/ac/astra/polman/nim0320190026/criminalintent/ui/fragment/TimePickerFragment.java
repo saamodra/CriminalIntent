@@ -1,4 +1,4 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.ui.fragment;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -16,7 +16,7 @@ public class TimePickerFragment extends DialogFragment {
 
     private Callbacks callbacks;
 
-    interface Callbacks {
+    public interface Callbacks {
         void onTimeSelected(Date date);
     }
 

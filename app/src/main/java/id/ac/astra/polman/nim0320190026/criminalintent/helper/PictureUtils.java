@@ -1,4 +1,4 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.helper;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
