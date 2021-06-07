@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">IntensiKriminil</string>
+    <string name="crime_title_hint">Masukkan judul kriminalitas</string>
+    <string name="crime_title_label">Judul</string>
+    <string name="crime_details_label">Detil</string>
+    <string name="crime_solved_label">Selesai</string>
+    <string name="contact_police">Kontak Polisi</string>
+    <string name="new_crime">Kriminalitas Baru</string>
+    <string name="crime_suspect_text">Pilih Tersangka</string>
+    <string name="crime_report_text">Kirim Laporan Kriminalitas</string>
+    <string name="crime_report">%1$s! Kriminalitas ditemukan pada %2$s. %3$s, dan %4$s</string>
+    <string name="crime_report_solved">Kasus selesai</string>
+    <string name="crime_report_unsolved">Kasus belum selesai</string>
+    <string name="crime_report_no_suspect">tidak ada tersangka</string>
+    <string name="crime_report_suspect">tersangka adalah %s</string>
+    <string name="crime_report_subject">Laporan Kriminalitas IntensiKriminil</string>
+    <string name="send_report">Kirim laporan kriminalitas melalui</string>
+    <string name="close_detail_fragment">Tutup</string>
+</resources>
