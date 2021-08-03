@@ -1,4 +1,4 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.ui.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,9 +16,9 @@ public class DatePickerFragment extends DialogFragment {
 
     private static final String ARG_DATE = "date";
 
-    private Callbacks callbacks;
+    public Callbacks callbacks;
 
-    interface Callbacks {
+    public interface Callbacks {
         void onDateSelected(Date date);
     }
 

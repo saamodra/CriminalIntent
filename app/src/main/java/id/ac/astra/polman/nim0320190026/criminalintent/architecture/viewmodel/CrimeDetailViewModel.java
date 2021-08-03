@@ -1,4 +1,4 @@
-package id.ac.astra.polman.nim0320190026.criminalintent;
+package id.ac.astra.polman.nim0320190026.criminalintent.architecture.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,12 +6,14 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import java.io.File;
-import java.util.UUID;
 
-import id.ac.astra.polman.nim0320190026.criminalintent.database.CrimeRepository;
+import id.ac.astra.polman.nim0320190026.criminalintent.model.Crime;
+import id.ac.astra.polman.nim0320190026.criminalintent.architecture.repository.CrimeRepository;
 
 public class CrimeDetailViewModel extends ViewModel {
-    private MutableLiveData<UUID> mCrimeIdLiveData;
+    private static final String TAG = "CrimeDetailViewModel";
+
+    private MutableLiveData<String> mCrimeIdLiveData;
     private CrimeRepository mCrimeRepository;
     private LiveData<Crime> mCrimeLiveData;
 
@@ -21,7 +23,7 @@ public class CrimeDetailViewModel extends ViewModel {
         mCrimeLiveData = Transformations.switchMap(mCrimeIdLiveData, crimeId -> mCrimeRepository.getCrime(crimeId));
     }
 
-    public void loadCrime(UUID crimeId) {
+    public void loadCrime(String crimeId) {
         mCrimeIdLiveData.setValue(crimeId);
     }
 

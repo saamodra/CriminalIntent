@@ -2,7 +2,7 @@ package id.ac.astra.polman.nim0320190026.criminalintent;
 
 import android.app.Application;
 
-import id.ac.astra.polman.nim0320190026.criminalintent.database.CrimeRepository;
+import id.ac.astra.polman.nim0320190026.criminalintent.architecture.repository.CrimeRepository;
 
 public class CriminalIntentApplication extends Application {
 
